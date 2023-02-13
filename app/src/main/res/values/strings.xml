@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MyConso</string>
+    <string name="plus">+</string>
+    <string name="button_plus">button to add a new fuel consumption to the list</string>
+    <string name="price">Price (€/L)</string>
+    <string name="liters">Liters</string>
+    <string name="date">Date</string>
+    <string name="cancel_adding_refill">Cancel adding refill</string>
+    <string name="add_refill">Add refill</string>
+    <string name="refill_date">Refill Date</string>
 </resources>

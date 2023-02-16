@@ -1,8 +1,9 @@
 package yugs.myconso.view;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import yugs.myconso.R;
 import yugs.myconso.presenter.FuelRefillEditionPresenter;
 import yugs.myconso.presenter.interfaces.FuelRefillEdition;
 
-public class FuelRefillEditionActivity extends AppCompatActivity implements FuelRefillEdition.View{
+public class FuelRefillEditionActivity extends AppCompatActivity implements FuelRefillEdition.View {
     private FuelRefillEdition.Presenter presenter;
     private FloatingActionButton confirmAddingRefill, cancelRefill;
     private TextView refillPriceByLiter, refillLiters;
@@ -40,7 +41,10 @@ public class FuelRefillEditionActivity extends AppCompatActivity implements Fuel
 
         datePickerButton.setOnClickListener(view -> datePickerDialog.show());
         cancelRefill.setOnClickListener((view -> presenter.onCancel()));
-        confirmAddingRefill.setOnClickListener((view -> presenter.onConfirm(refillPriceByLiter.getText().toString(), refillLiters.getText().toString())));
+        confirmAddingRefill.setEnabled(false);
+
+        refillLiters.addTextChangedListener(watcher);
+        refillPriceByLiter.addTextChangedListener(watcher);
     }
 
     @Override
@@ -57,4 +61,22 @@ public class FuelRefillEditionActivity extends AppCompatActivity implements Fuel
     public void setRefillList() {
         setContentView(R.layout.activity_main);
     }
+
+    private final TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            confirmAddingRefill.setEnabled(!refillPriceByLiter.getText().toString().isEmpty() && !refillLiters.getText().toString().isEmpty());
+        }
+    };
+
 }
